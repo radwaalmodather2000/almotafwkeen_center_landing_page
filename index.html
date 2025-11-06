@@ -10,17 +10,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* --- متغيرات الألوان المودرن --- */
         :root {
-            --primary-color: #4a148c; /* بنفسجي عميق */
-            --accent-color: #00bcd4;  /* سماوي/سيان مشرق */
-            --light-bg: #f4f7f6;      /* رمادي فاتح جداً */
-            --dark-text: #2c3e50;     /* كحلي غامق (للنصوص) */
+            --primary-color: #4a148c; 
+            --accent-color: #00bcd4;  
+            --light-bg: #f4f7f6;     
+            --dark-text: #2c3e50;     
             --white-color: #ffffff;
             --shadow-color: rgba(0, 0, 0, 0.1);
         }
 
-        /* --- إعدادات عامة --- */
         * {
             margin: 0;
             padding: 0;
@@ -54,7 +52,6 @@
             text-align: center;
         }
 
-        /* --- أنيميشن التمرير (Scroll Animation) --- */
         .hidden {
             opacity: 0;
             transform: translateY(30px) scale(0.98);
@@ -63,7 +60,6 @@
             will-change: opacity, transform;
         }
 
-        /* --- 1. الشريط العلوي (Navbar) --- */
         nav {
             display: flex;
             justify-content: space-around;
@@ -171,7 +167,6 @@
             margin-bottom: 40px;
         }
 
-        /* --- تصميم الأزرار المودرن --- */
         .cta-button {
             background: linear-gradient(45deg, var(--accent-color), #00d4c1);
             color: var(--white-color);
@@ -206,7 +201,6 @@
             box-shadow: none;
         }
 
-        /* --- 3. قسم المميزات (Services) --- */
         .services {
             background-color: var(--white-color);
         }
@@ -250,7 +244,6 @@
             font-size: 1.5rem;
         }
         
-        /* --- 4. قسم المواد الدراسية --- */
         .subjects {
             background-color: var(--light-bg);
         }
@@ -284,7 +277,6 @@
             font-weight: 600;
         }
 
-        /* --- 5. قسم التواصل (Call to Action) --- */
         .contact {
             background: linear-gradient(135deg, var(--primary-color), #6a1b9a);
             color: var(--white-color);
@@ -310,7 +302,6 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        /* --- 6. التذييل --- */
         footer {
             background-color: var(--dark-text);
             color: var(--light-bg);
@@ -318,8 +309,7 @@
             padding: 25px;
         }
 
-        /* --- 7. نافذة الحجز المنبثقة (Modal) --- */
-        /* --- الكود الجديد (المُعدل) --- */
+       
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -328,15 +318,13 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     display: none;
-    /* align-items: center; (تم حذف هذا السطر) */
-    justify-content: center; /* هذا يبقيه في المنتصف أفقياً */
+    justify-content: center; 
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 
-    /* --- الإضافة الأهم لحل السكرول --- */
-    overflow-y: auto; /* يجعل الخلفية كلها تقبل السكرول */
-    padding: 5vh 10px; /* يضيف مسافة 5% من الشاشة فوق وتحت */
+    overflow-y: auto;
+    padding: 5vh 10px; 
 }
         
         .modal-overlay.active {
@@ -344,7 +332,6 @@
             opacity: 1;
         }
 
-       /* --- الكود الجديد (المُعدل) --- */
 .modal-content {
     background: var(--white-color);
     padding: 30px;
@@ -356,7 +343,6 @@
     transform: scale(0.9);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
-    /* --- الإضافة للحفاظ على التوسيط --- */
     margin: 0 auto; 
 }
         .modal-overlay.active .modal-content {
@@ -381,7 +367,6 @@
             color: var(--dark-text);
         }
 
-        /* --- تصميم فورم الحجز --- */
         .booking-form .form-group {
             margin-bottom: 20px;
             text-align: right;
@@ -413,7 +398,6 @@
             margin-top: 10px;
         }
 
-        /* --- تنسيق خانات الاختيار (Checkboxes) --- */
         .booking-form fieldset {
             border: none;
             padding: 0;
@@ -444,7 +428,7 @@
             align-items: center;
             margin-left: 15px;
             margin-bottom: 10px;
-            width: 45%; /* لترتيبهم في عمودين */
+            width: 45%; 
         }
         
         .checkbox-item label {
@@ -460,7 +444,6 @@
         }
 
 
-        /* --- تصميم الموبايل (Responsive) --- */
         @media screen and (max-width: 768px) {
             .nav-links a::after {
                 display: none;
@@ -530,13 +513,11 @@
                 max-width: 330px;
             }
             
-            /* (جديد) جعل خانات الاختيار تحت بعضها في الموبايل */
             .checkbox-item {
                 width: 100%;
                 margin-left: 0;
             }
             
-            /* (تعديل) لضمان مسافات مريحة للنافذة في الموبايل */
             .modal-content {
                 padding: 25px 20px;
             }
@@ -694,7 +675,6 @@
 
 
     <script>
-        // --- 1. وظيفة تشغيل قائمة الموبايل (Burger Menu) ---
         const navSlide = () => {
             const burger = document.querySelector('.burger');
             const nav = document.querySelector('.nav-links');
@@ -713,7 +693,6 @@
             });
         }
         
-        // --- 2. وظيفة نافذة الحجز المنبثقة (Modal) ---
         const modalLogic = () => {
             const modalOverlay = document.getElementById('booking-modal');
             const openModalBtns = document.querySelectorAll('.open-modal-btn');
@@ -757,7 +736,6 @@
             });
         }
         
-        // --- 3. وظيفة الأنيميشن عند التمرير (Scroll Animation) ---
         const scrollAnimate = () => {
             const hiddenElements = document.querySelectorAll('.hidden');
 
@@ -775,7 +753,6 @@
             hiddenElements.forEach((el) => observer.observe(el));
         }
 
-        // --- استدعاء جميع الوظائف ---
         navSlide();
         modalLogic();
         scrollAnimate();
