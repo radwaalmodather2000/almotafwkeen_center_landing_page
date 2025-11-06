@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع المتفوقين | دروس خصوصية للابتدائي والإعدادي</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- متغيرات الألوان المودرن --- */
+        :root {
+            --primary-color: #4a148c; /* بنفسجي عميق */
+            --accent-color: #00bcd4;  /* سماوي/سيان مشرق */
+            --light-bg: #f4f7f6;      /* رمادي فاتح جداً */
+            --dark-text: #2c3e50;     /* كحلي غامق (للنصوص) */
+            --white-color: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- إعدادات عامة --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            overflow-x: hidden;
+            background-color: var(--white-color);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        /* --- أنيميشن التمرير (Scroll Animation) --- */
+        .hidden {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 0.6s ease-out, 
+                        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: opacity, transform;
+        }
+
+        /* --- 1. الشريط العلوي (Navbar) --- */
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 8vh;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            color: var(--primary-color);
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            list-style: none;
+            width: 40%;
+        }
+
+        .nav-links a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            display: block;
+            margin-top: 3px;
+            right: 0;
+            background: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+
+
+        .burger {
+            display: none; cursor: pointer;
+        }
+        .burger div {
+            width: 25px; height: 3px; background-color: var(--dark-text);
+            margin: 5px; transition: all 0.3s ease;
+        }
+
+        /* --- 2. القسم الرئيسي (Hero) --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(74, 20, 140, 0.85), rgba(0, 188, 212, 0.7)), url('https://source.unsplash.com/random/1600x900/?study,books');
+            background-size: cover;
+            background-position: center;
+            color: var(--white-color);
+            padding-top: 8vh;
+        }
+        
+        .hero-content {
+            animation: fadeInHero 1s ease-out;
+        }
+        
+        @keyframes fadeInHero {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-weight: 400;
+            color: var(--white-color);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        /* --- تصميم الأزرار المودرن --- */
+        .cta-button {
+            background: linear-gradient(45deg, var(--accent-color), #00d4c1);
+            color: var(--white-color);
+            padding: 14px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 188, 212, 0.4);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 188, 212, 0.5);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--white-color);
+            box-shadow: none;
+        }
+        
+        .cta-button.secondary:hover {
+            background-color: var(--white-color);
+            color: var(--primary-color);
+            transform: translateY(0);
+            box-shadow: none;
+        }
+
+        /* --- 3. قسم المميزات (Services) --- */
+        .services {
+            background-color: var(--white-color);
+        }
+
+        .services-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: var(--white-color);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            width: 330px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover i {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            color: var(--dark-text);
+            font-size: 1.5rem;
+        }
+        
+        /* --- 4. قسم المواد الدراسية --- */
+        .subjects {
+            background-color: var(--light-bg);
+        }
+        .subjects-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .subject-card {
+            background: var(--white-color);
+            border-radius: 12px;
+            padding: 25px 20px;
+            width: 180px;
+            box-shadow: 0 8px 25px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .subject-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .subject-card i {
+            font-size: 40px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        .subject-card h3 {
+            font-size: 1.2rem;
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        /* --- 5. قسم التواصل (Call to Action) --- */
+        .contact {
+            background: linear-gradient(135deg, var(--primary-color), #6a1b9a);
+            color: var(--white-color);
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            color: var(--white-color);
+        }
+
+        .contact p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .contact .cta-button {
+            background: var(--white-color);
+            color: var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .contact .cta-button:hover {
+            background-color: var(--light-bg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* --- 6. التذييل --- */
+        footer {
+            background-color: var(--dark-text);
+            color: var(--light-bg);
+            text-align: center;
+            padding: 25px;
+        }
+
+        /* --- 7. نافذة الحجز المنبثقة (Modal) --- */
+        /* --- الكود الجديد (المُعدل) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    /* align-items: center; (تم حذف هذا السطر) */
+    justify-content: center; /* هذا يبقيه في المنتصف أفقياً */
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+
+    /* --- الإضافة الأهم لحل السكرول --- */
+    overflow-y: auto; /* يجعل الخلفية كلها تقبل السكرول */
+    padding: 5vh 10px; /* يضيف مسافة 5% من الشاشة فوق وتحت */
+}
+        
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+       /* --- الكود الجديد (المُعدل) --- */
+.modal-content {
+    background: var(--white-color);
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    /* --- الإضافة للحفاظ على التوسيط --- */
+    margin: 0 auto; 
+}
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 2rem;
+            color: #aaa;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            color: var(--dark-text);
+        }
+
+        /* --- تصميم فورم الحجز --- */
+        .booking-form .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .booking-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .booking-form input,
+        .booking-form select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+        }
+        
+        .booking-form input:invalid,
+        .booking-form select:invalid {
+            border-color: #e74c3c;
+        }
+        
+        .booking-form .cta-button {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* --- تنسيق خانات الاختيار (Checkboxes) --- */
+        .booking-form fieldset {
+            border: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .booking-form legend {
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            width: 100%;
+            text-align: right;
+            padding-right: 0;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            text-align: right;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+            margin-bottom: 10px;
+            width: 45%; /* لترتيبهم في عمودين */
+        }
+        
+        .checkbox-item label {
+            margin-right: 8px;
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+
+        /* --- تصميم الموبايل (Responsive) --- */
+        @media screen and (max-width: 768px) {
+            .nav-links a::after {
+                display: none;
+            }
+            .nav-links a:hover {
+                color: var(--accent-color);
+            }
+            
+            .nav-links {
+                position: fixed;
+                right: 0;
+                height: 92vh;
+                top: 8vh;
+                background-color: var(--white-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-around;
+                width: 60%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+            }
+
+            .nav-links li {
+                opacity: 0;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .nav-active {
+                transform: translateX(0%);
+            }
+
+            .toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            .toggle .line2 {
+                opacity: 0;
+            }
+            .toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            @keyframes navLinkFade {
+                from { opacity: 0; transform: translateX(50px); }
+                to { opacity: 1; transform: translateX(0px); }
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-content h2 {
+                font-size: 1.4rem;
+            }
+            h2 {
+                font-size: 2rem;
+            }
+
+            .services-container, .subjects-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .subject-card {
+                width: 90%;
+                max-width: 330px;
+            }
+            
+            /* (جديد) جعل خانات الاختيار تحت بعضها في الموبايل */
+            .checkbox-item {
+                width: 100%;
+                margin-left: 0;
+            }
+            
+            /* (تعديل) لضمان مسافات مريحة للنافذة في الموبايل */
+            .modal-content {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">المتفوقين</div>
+            <ul class="nav-links">
+                <li><a href="#hero">الرئيسية</a></li>
+                <li><a href="#services">لماذا نحن؟</a></li>
+                <li><a href="#subjects">المواد</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <h1>أهلاً بك في "المتفوقين"</h1>
+                <h2>بوابتك للنجاح والتفوق في المرحلتين الابتدائية والإعدادية</h2>
+                <p>نخبة من أفضل المعلمين لتأسيس علمي سليم ومتابعة دورية.</p>
+                <a href="#" class="cta-button open-modal-btn">احجز حصة تجريبية</a>
+                <a href="#services" class="cta-button secondary">اعرف المزيد</a>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <h2 class="hidden">لماذا تختار المتفوقين؟</h2>
+            <div class="services-container">
+                <div class="service-card hidden">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <h3>معلمون خبراء</h3>
+                    <p>نخبة من المعلمين المتخصصين في التعامل مع طلاب التأسيس والمراحل الإعدادية.</p>
+                </div>
+                <div class="service-card hidden">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <h3>طرق شرح مبتكرة</h3>
+                    <p>نستخدم أساليب تفاعلية حديثة لضمان استيعاب الطالب للمعلومة بسهولة ومتعة.</p>
+                </div>
+                <div class="service-card hidden">
+                    <i class="fa-solid fa-user-check"></i>
+                    <h3>متابعة فردية</h3>
+                    <p>تقارير دورية لولي الأمر وحصص فردية (أونلاين أو حضوري) لضمان أعلى مستوى.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="subjects" class="subjects">
+            <h2 class="hidden">المواد التي نغطيها</h2>
+            <div class="subjects-container">
+                <div class="subject-card hidden">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h3>اللغة العربية</h3>
+                </div>
+                <div class="subject-card hidden">
+                    <i class="fa-solid fa-spell-check"></i>
+                    <h3>اللغة الإنجليزية</h3>
+                </div>
+                <div class="subject-card hidden">
+                    <i class="fa-solid fa-calculator"></i>
+                    <h3>الرياضيات</h3>
+                </div>
+                <div class="subject-card hidden">
+                    <i class="fa-solid fa-flask"></i>
+                    <h3>العلوم</h3>
+                </div>
+                <div class="subject-card hidden">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <h3>الدراسات الاجتماعية</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2 class="hidden">هل أنت مستعد للبدء؟</h2>
+            <p class="hidden">تواصل معنا الآن لحجز حصة تجريبية مجانية والتعرف على نظامنا.</p>
+            <a href="#" class="cta-button open-modal-btn hidden">احجز الآن</a>
+            <a href="https://wa.me/201050644227" target="_blank" class="cta-button hidden">تواصل واتساب</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 موقع المتفوقين. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <div class="modal-overlay" id="booking-modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close-btn">&times;</span>
+            <h2>احجز حصتك التجريبية</h2>
+            <form class="booking-form" id="booking-form">
+                <div class="form-group">
+                    <label for="student-name">اسم الطالب</label>
+                    <input type="text" id="student-name" required minlength="3">
+                </div>
+                <div class="form-group">
+                    <label for="parent-name">اسم ولي الأمر</label>
+                    <input type="text" id="parent-name" required minlength="3">
+                </div>
+                <div class="form-group">
+                    <label for="phone">رقم الموبايل (للتواصل)</label>
+                    <input type="tel" id="phone" required 
+                           pattern="01[0125][0-9]{8}" 
+                           title="ادخل رقم موبايل مصري صحيح (11 رقم)">
+                </div>
+                <div class="form-group">
+                    <label for="grade">المرحلة الدراسية</label>
+                    <select id="grade" required>
+                        <option value="">اختر المرحلة...</option>
+                        <option value="ابتدائي">المرحلة الابتدائية</option>
+                        <option value="اعدادي">المرحلة الإعدادية</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <fieldset>
+                        <legend>المواد المطلوبة (اختر مادة أو أكثر)</legend>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sub-arabic" name="subject" value="عربي">
+                                <label for="sub-arabic">اللغة العربية</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sub-english" name="subject" value="انجليزي">
+                                <label for="sub-english">اللغة الإنجليزية</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sub-math" name="subject" value="رياضيات">
+                                <label for="sub-math">الرياضيات</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sub-science" name="subject" value="علوم">
+                                <label for="sub-science">العلوم</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sub-social" name="subject" value="دراسات">
+                                <label for="sub-social">الدراسات</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <button type="submit" class="cta-button">إرسال الحجز</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        // --- 1. وظيفة تشغيل قائمة الموبايل (Burger Menu) ---
+        const navSlide = () => {
+            const burger = document.querySelector('.burger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.nav-links li');
+
+            burger.addEventListener('click', () => {
+                nav.classList.toggle('nav-active');
+                navLinks.forEach((link, index) => {
+                    if (link.style.animation) {
+                        link.style.animation = '';
+                    } else {
+                        link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                    }
+                });
+                burger.classList.toggle('toggle');
+            });
+        }
+        
+        // --- 2. وظيفة نافذة الحجز المنبثقة (Modal) ---
+        const modalLogic = () => {
+            const modalOverlay = document.getElementById('booking-modal');
+            const openModalBtns = document.querySelectorAll('.open-modal-btn');
+            const closeModalBtn = document.getElementById('modal-close-btn');
+            const bookingForm = document.getElementById('booking-form');
+
+            const openModal = (e) => {
+                e.preventDefault();
+                modalOverlay.classList.add('active');
+            };
+
+            const closeModal = () => {
+                modalOverlay.classList.remove('active');
+            };
+
+            openModalBtns.forEach(btn => {
+                btn.addEventListener('click', openModal);
+            });
+
+            closeModalBtn.addEventListener('click', closeModal);
+
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+            
+            bookingForm.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+                
+                const checkedSubjects = bookingForm.querySelectorAll('input[name="subject"]:checked');
+                
+                if (checkedSubjects.length === 0) {
+                    alert('الرجاء اختيار مادة واحدة على الأقل.');
+                    return; 
+                }
+                
+                alert('تم إرسال طلبك بنجاح! سنتواصل معك قريباً لتأكيد الحصة.');
+                closeModal();
+                bookingForm.reset();
+            });
+        }
+        
+        // --- 3. وظيفة الأنيميشن عند التمرير (Scroll Animation) ---
+        const scrollAnimate = () => {
+            const hiddenElements = document.querySelectorAll('.hidden');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.remove('hidden');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            hiddenElements.forEach((el) => observer.observe(el));
+        }
+
+        // --- استدعاء جميع الوظائف ---
+        navSlide();
+        modalLogic();
+        scrollAnimate();
+
+    </script>
+</body>
+</html>
